@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator anim;
     private float horizontalInput;
     public Rigidbody2D rb;
-    public float jumpAmount = 3;
+    public float jumpAmount = 50;
     // Start is called before the first frame update
     void Start()
     {

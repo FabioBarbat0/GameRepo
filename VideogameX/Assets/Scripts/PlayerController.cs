@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator anim;
     private float horizontalInput;
     private Rigidbody2D rb;
-    private float jumpAmount = 50;
+    private float jumpAmount = 15;
 
 
     // Start is called before the first frame update
@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     {
         Jump();
         Move();
-        StopJump();
 
     }
 
@@ -32,13 +31,24 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
             anim.SetBool("Grounded", false);
         }
+        StopJump();
     }
 
 
     void Move() {
         horizontalInput = Input.GetAxis("Horizontal");
         float speed = (Input.GetAxisRaw("Horizontal") != 0) ? 3 : 0;
-        transform.Translate(Vector3.right * Time.deltaTime * horizontalInput * speed);
+        if (horizontalInput > 0)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            transform.Translate(Vector3.right * Time.deltaTime * horizontalInput * speed);
+        }
+        else if(horizontalInput < 0)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            transform.Translate(Vector3.left * Time.deltaTime * horizontalInput * speed);
+
+        }
         anim.SetFloat("Speed", speed);
     }
 

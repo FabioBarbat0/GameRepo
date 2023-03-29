@@ -5,12 +5,15 @@ using UnityEngine;
 public class RogueController : MonoBehaviour
 {
     public Animator anim;
-    public bool righSideChecked = false;
+    private bool righSideChecked = false;
+    private float rightSideTarget;
+    private float leftSideTarget;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        rightSideTarget = transform.position.x + 10;
+        leftSideTarget = transform.position.x - 10;
     }
 
     // Update is called once per frame
@@ -21,18 +24,21 @@ public class RogueController : MonoBehaviour
 
     void Move()
     {
+        
         if(!righSideChecked) {
+
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(10, transform.position.y), 2 * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(rightSideTarget, transform.position.y), 5 * Time.deltaTime);
         }else if(righSideChecked) {
             transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(-10, transform.position.y), 2 * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(leftSideTarget, transform.position.y), 5 * Time.deltaTime);
         }
 
-        if (transform.position.x == 10) {
+        if (transform.position.x == rightSideTarget) {
             righSideChecked = true;
         }
-        else if (transform.position.x == -10){
+        else if (transform.position.x == leftSideTarget)
+        {
             righSideChecked = false;
         }
         

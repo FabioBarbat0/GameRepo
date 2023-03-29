@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     void Move() {
         horizontalInput = Input.GetAxis("Horizontal");
-        float speed = (Input.GetAxisRaw("Horizontal") != 0) ? 3 : 0;
+        float speed = (Input.GetAxisRaw("Horizontal") != 0) ? 5 : 0;
         if (horizontalInput > 0)
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));

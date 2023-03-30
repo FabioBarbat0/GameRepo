@@ -8,6 +8,7 @@ public class RogueController : MonoBehaviour
     private bool righSideChecked = false;
     private float rightSideTarget;
     private float leftSideTarget;
+    private bool alerted = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,13 +20,18 @@ public class RogueController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        if (!alerted) {
+            Move();
+        }
+        else {
+            Shoot();
+        }
     }
 
     void Move()
     {
-        
-        if(!righSideChecked) {
+        anim.SetBool("Alert", false);
+        if (!righSideChecked) {
 
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(rightSideTarget, transform.position.y), 5 * Time.deltaTime);
@@ -42,15 +48,32 @@ public class RogueController : MonoBehaviour
             righSideChecked = false;
         }
         
-        anim.SetFloat("Speed", 2);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player") {
-
+            alerted = true;
+            if (collision.transform.position.x < transform.position.x) {
+                transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            }
+            else if(collision.transform.position.x > transform.position.x) {
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
         }
 
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            alerted = false;
+        }
+    }
+
+    public void Shoot() {
+        anim.SetBool("Alert",true);
     }
 
 }

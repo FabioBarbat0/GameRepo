@@ -6,6 +6,8 @@ public class EnemyProjectile : MonoBehaviour
 {
     private GameObject player;
     private Rigidbody2D rb;
+    private float timer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,12 @@ public class EnemyProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timer += Time.deltaTime;
+
+        if (timer > 3) {
+            Destroy(gameObject);
+        }
     }
+
+
 }

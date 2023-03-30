@@ -19,6 +19,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private LayerMask jumpableGround;
 
+    public Game gameManager;
+    private float timer;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +73,15 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded() {
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, UnityEngine.Vector2.down, .1f, jumpableGround);    
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Projectile")
+        {
+            gameManager.gameOver();
+            gameObject.SetActive(false);
+        }
     }
 
 

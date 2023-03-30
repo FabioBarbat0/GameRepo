@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 2c897c06b6f9c4e199ccf1423ba3480a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Quirki Scandi
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 2b86e265cc6f044e6b012b4ddfa7dc73, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

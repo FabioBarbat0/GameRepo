@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class RogueController : MonoBehaviour
 {
-    public Animator anim;
-    private bool righSideChecked = false;
+    public Animator anim; //animation
+
+    private bool righSideChecked = false; //check sides
     private float rightSideTarget;
     private float leftSideTarget;
-    private bool alerted = false;
+
+    private bool alerted = false; //alert state
+
+    public GameObject projectile; //projectile elements
+    public Transform projectilePos;
+    private float timer;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +56,7 @@ public class RogueController : MonoBehaviour
         
     }
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player") {
@@ -59,12 +66,13 @@ public class RogueController : MonoBehaviour
             }
             else if(collision.transform.position.x > transform.position.x) {
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                Instantiate(projectile, projectile.transform.position, projectile.transform.rotation);
             }
         }
 
     }
 
-    public void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
@@ -72,8 +80,19 @@ public class RogueController : MonoBehaviour
         }
     }
 
-    public void Shoot() {
+    private void Shoot() {
         anim.SetBool("Alert",true);
+
+        timer += Time.deltaTime;
+        if (timer > 1) {
+            timer = 0;
+            SpawnProjectile();
+        }
+    }
+
+    private void SpawnProjectile()
+    {
+        Instantiate(projectile, projectilePos.position, transform.rotation);
     }
 
 }

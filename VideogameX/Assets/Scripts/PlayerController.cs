@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     public bool grounded = false;
     private BoxCollider2D coll;
 
+    //private int lives = 3;
+    public int ideas = 0;
+    public int pages = 0;
+
     [SerializeField] private LayerMask jumpableGround;
 
     // Start is called before the first frame update
@@ -37,6 +41,7 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("Jump");
             rb.AddForce(UnityEngine.Vector2.up * jumpAmount, ForceMode2D.Impulse);
             anim.SetBool("Grounded", false);
+            print(pages);
         }
         else {
             anim.SetBool("Grounded", true);
@@ -65,5 +70,6 @@ public class PlayerController : MonoBehaviour
     private bool IsGrounded() {
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, UnityEngine.Vector2.down, .1f, jumpableGround);    
     }
+
 
 }

@@ -23,10 +23,10 @@ public class Floating : MonoBehaviour
 
     private void floatingObject() {
         if (!floated) {
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, endYPosition), Mathf.Sin(2 * Time.deltaTime));
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, endYPosition), 2 * Time.deltaTime);
         }
         else {
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, startYPosition), Mathf.Sin(2 * Time.deltaTime));
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, startYPosition), 2 * Time.deltaTime);
         }
 
         if (transform.position.y == endYPosition)

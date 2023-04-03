@@ -84,7 +84,7 @@ public class RogueController : MonoBehaviour
         anim.SetBool("Alert",true);
 
         timer += Time.deltaTime;
-        if (timer > 1) {
+        if (timer > 2) {
             timer = 0;
             SpawnProjectile();
         }
